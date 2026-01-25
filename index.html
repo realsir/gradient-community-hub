@@ -20,20 +20,12 @@
       --icon-purple: #9d00ff;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html, body {
-      width: 100%;
-      height: 100%;
-    }
+    html, body { width: 100%; height: 100%; }
 
     body {
-      font-family: "Press Start 2P", system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif, monospace;
+      font-family: "Press Start 2P", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, monospace;
       background: radial-gradient(circle at top left, #233142 0, var(--bg) 50%) fixed;
       color: var(--text);
       overflow: hidden;
@@ -63,17 +55,13 @@
       letter-spacing: 0.08em;
     }
 
-    .top-left,
-    .top-right {
+    .top-left, .top-right {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .traffic-lights {
-      display: flex;
-      gap: 5px;
-    }
+    .traffic-lights { display: flex; gap: 5px; }
 
     .dot {
       width: 9px;
@@ -126,8 +114,7 @@
       box-shadow:
         0 18px 26px rgba(0, 0, 0, 0.55),
         0 0 0 1px rgba(255, 255, 255, 0.06);
-      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out,
-        background 0.15s ease-out;
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, background 0.15s ease-out;
     }
 
     .dock-icon:hover .icon-square {
@@ -137,9 +124,7 @@
         0 0 0 1px rgba(255, 255, 255, 0.1);
     }
 
-    .icon-label {
-      text-shadow: 0 0 6px rgba(0, 0, 0, 0.9);
-    }
+    .icon-label { text-shadow: 0 0 6px rgba(0, 0, 0, 0.9); }
 
     .icon-text {
       font-size: 14px;
@@ -152,6 +137,16 @@
     .row-2 .icon-text { color: var(--icon-green); }
     .row-3 .icon-text { color: var(--icon-yellow); }
     .row-4 .icon-text { color: var(--icon-purple); }
+
+    /* NEW: disabled (non-clickable) half-transparent icons */
+    .dock-icon.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+      cursor: default;
+    }
+    .dock-icon.disabled .icon-square {
+      transform: none;
+    }
 
     .dev-wrapper {
       position: fixed;
@@ -302,6 +297,21 @@
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">MINESWEEPER</span>
       </a>
+
+      <a class="dock-icon" href="https://chupa-grad-game.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">CHUPA GAME</span>
+      </a>
+
+      <div class="dock-icon disabled" aria-disabled="true" title="Coming soon">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">RICH HEXX</span>
+      </div>
+
+      <div class="dock-icon disabled" aria-disabled="true" title="Coming soon">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">SECRET GAME</span>
+      </div>
     </div>
 
     <div class="row row-3">
@@ -309,6 +319,11 @@
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">j.mike banner's</span>
       </a>
+
+      <div class="dock-icon disabled" aria-disabled="true" title="Coming soon">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">GRAD GALLERY</span>
+      </div>
     </div>
 
     <div class="row row-4">
