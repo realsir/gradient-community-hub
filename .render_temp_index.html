@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GRADIENT COMMUNITY HUB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --text: #c5c6c7;
+      --cursor-color: #ffffff;
+
+      --icon-red: #ff4b4b;
+      --icon-green: #0c7a35;
+      --icon-yellow: #f6d44a;
+      --icon-purple: #9d00ff;
+
+      --panel: rgba(10, 12, 18, 0.72);
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --panel-glow: rgba(157, 0, 255, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; }
+
+    body {
+      font-family: "Press Start 2P", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, monospace;
+      background: radial-gradient(circle at top left, #233142 0, var(--bg) 50%) fixed;
+      color: var(--text);
+      overflow: hidden;
+      cursor: none;
+    }
+
+    body.pfp-open .dev-wrapper { display: none; }
+
+    .custom-cursor {
+      position: fixed;
+      z-index: 9999;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+      color: var(--cursor-color);
+      user-select: none;
+      text-shadow: 0 0 4px #000;
+    }
+
+    .top-bar {
+      width: 100%;
+      height: 32px;
+      background: linear-gradient(to bottom, #141824, #0c0f18);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+    }
+
+    .top-left, .top-right { display: flex; align-items: center; gap: 12px; }
+    .traffic-lights { display: flex; gap: 5px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.4); }
+    .dot.red { background: #ff5f57; }
+    .dot.yellow { background: #febc2e; }
+    .dot.green { background: #28c840; }
+
+    .desktop {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 32px);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .row { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+
+    .dock-icon {
+      width: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 8px;
+      text-align: center;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .icon-square {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 18px 26px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.06);
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+    }
+
+    .dock-icon:hover .icon-square {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow:
+        0 22px 30px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    .icon-label { text-shadow: 0 0 6px rgba(0, 0, 0, 0.9); }
+
+    .icon-text {
+      font-size: 14px;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.7), 0 0 6px rgba(0,0,0,0.8);
+    }
+
+    .row-1 .icon-text { color: var(--icon-red); }
+    .row-2 .icon-text { color: var(--icon-green); }
+    .row-3 .icon-text { color: var(--icon-green); }
+    .row-4 .icon-text { color: var(--icon-yellow); }
+    .row-5 .icon-text { color: var(--icon-purple); }
+
+    .overlay {
+      position: fixed;
+      inset: 32px 0 0 0;
+      z-index: 8000;
+      display: none;
+      padding: 22px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(157, 0, 255, 0.18), transparent 45%),
+        radial-gradient(circle at 80% 20%, rgba(12, 122, 53, 0.14), transparent 52%),
+        linear-gradient(180deg, rgba(7, 9, 14, 0.88), rgba(11, 12, 16, 0.88));
+      backdrop-filter: blur(6px);
+      overflow: auto;
+      cursor: none;
+    }
+    .overlay.open { display: block; }
+
+    .panel {
+      max-width: 1100px;
+      margin: 0 auto;
+      border-radius: 18px;
+      padding: 18px;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      box-shadow:
+        0 24px 60px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(0,0,0,0.25) inset,
+        0 0 30px var(--panel-glow);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .panel-title {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #e6e6e6;
+      text-shadow: 0 0 10px rgba(0,0,0,0.85);
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #e9e9e9;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor: none;
+      user-select: none;
+      transition: transform 0.12s ease-out, border-color 0.12s ease-out, background 0.12s ease-out;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.22);
+      background: rgba(0,0,0,0.5);
+    }
+
+    .hint {
+      font-size: 8px;
+      opacity: 0.75;
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .pfp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+    }
+
+    .pfp-card {
+      padding: 0;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      overflow: hidden;
+      background: transparent;
+      cursor: none;
+      display: block;
+      line-height: 0;
+      box-shadow: 0 16px 30px rgba(0,0,0,0.45);
+      transition: transform 0.15s ease-out, border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+    }
+
+    .pfp-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 22px 44px rgba(0,0,0,0.6);
+    }
+
+    .pfp-card img {
+      width: 100%;
+      height: auto;
+      display: block; 
+    }
+
+    .viewer {
+      position: fixed;
+      inset: 32px 0 0 0;
+      z-index: 8500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(4px);
+      cursor: none;
+    }
+    .viewer.open { display: flex; }
+
+    .viewer-box {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(10, 12, 18, 0.92);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.75);
+    }
+
+    .viewer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      gap: 10px;
+    }
+
+    .viewer-title {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 52vw;
+    }
+
+    .viewer-actions { display: flex; gap: 10px; }
+
+    .viewer-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: radial-gradient(circle at 20% 10%, rgba(157,0,255,0.12), transparent 45%),
+                  radial-gradient(circle at 80% 20%, rgba(246,212,74,0.10), transparent 55%),
+                  rgba(0,0,0,0.35);
+    }
+
+    .dev-wrapper {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      z-index: 9000;
+    }
+
+    .dev-wrapper a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 8px;
+      text-align: center;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .dev-square {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+      box-shadow:
+        0 18px 26px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.06);
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+    }
+
+    .dev-square img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .dev-wrapper a:hover .dev-square {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow:
+        0 22px 30px rgba(0, 0, 0, 0.65),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 900px) { body { overflow: auto; } }
+    @media (prefers-reduced-motion: reduce) {
+      .dock-icon:hover .icon-square, .dev-wrapper a:hover .dev-square, .btn:hover, .pfp-card:hover { transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="custom-cursor">./</div>
+
+  <div class="top-bar">
+    <div class="top-left">
+      <div class="traffic-lights">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      <span>GRADIENT COMMUNITY HUB</span>
+    </div>
+    <div class="top-right"><span>EN</span></div>
+  </div>
+
+  <div class="desktop" id="desktop">
+    <div class="row row-1">
+      <a class="dock-icon" href="https://be-with-parallax.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">Be w/ Parallax</span>
+      </a>
+      <a class="dock-icon" href="https://build-open-with-parallax.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">Build Open</span>
+      </a>
+      <a class="dock-icon" href="https://build-with-parallax.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">Build with Parallax</span>
+      </a>
+      <a class="dock-icon" href="https://download-parallax.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">Download Parallax</span>
+      </a>
+      <a class="dock-icon" href="https://echo-gradient.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">ECHO</span>
+      </a>
+    </div>
+
+    <div class="row row-2">
+      <a class="dock-icon" href="https://gradient-fun-game.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">GG</span>
+      </a>
+      <a class="dock-icon" href="https://grad-click-hunt.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">Click Hunt</span>
+      </a>
+      <a class="dock-icon" href="https://grad-dodge.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">Grad Dodge</span>
+      </a>
+      <a class="dock-icon" href="https://grad-hackers.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">Hackers</span>
+      </a>
+      <a class="dock-icon" href="https://grad-catch-game.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">Grad Catch</span>
+      </a>
+      <a class="dock-icon" href="https://grad-jump.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">GRAD JUMP</span>
+      </a>
+      <a class="dock-icon" href="https://ice-cream-for-david.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">ICE CREAM</span>
+      </a>
+    </div>
+
+    <div class="row row-3">
+      <a class="dock-icon" href="https://david-icecream-grad-game.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">ICE CREAM CAMPAIGN</span>
+      </a>
+      <a class="dock-icon" href="https://gradsaur-game.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">GRADsaur</span>
+      </a>
+      <a class="dock-icon" href="https://grad-minesweeper.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">MINESWEEPER</span>
+      </a>
+      <a class="dock-icon" href="https://chupa-grad-game.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">CHUPA GAME</span>
+      </a>
+      <a class="dock-icon" href="https://rich-hexx.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">RICH HEXX</span>
+      </a>
+      <a class="dock-icon" href="https://secret-grad-game.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">SECRET GAME</span>
+      </a>
+    </div>
+
+    <div class="row row-4">
+      <a class="dock-icon" href="https://gradient-banners-by-jmike.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">j.mike banner's</span>
+      </a>
+
+      <a class="dock-icon" href="#" id="openPfpTab" aria-label="Open J.MIKE PFP's">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">j.mike pfp's</span>
+      </a>
+
+      <a class="dock-icon" href="https://grad-gallery.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">GRAD GALLERY</span>
+      </a>
+    </div>
+
+    <div class="row row-5">
+      <a class="dock-icon" href="https://gradvember-arrived.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">Gradvember</span>
+      </a>
+      <a class="dock-icon" href="https://grad-xmas-contest.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">GRAD XMAS</span>
+      </a>
+      <a class="dock-icon" href="https://merry-grad-christmas.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">MERRY CHRISTMAS</span>
+      </a>
+    </div>
+  </div>
+
+  <section class="overlay" id="pfpOverlay" aria-hidden="true">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">J.MIKE PFP’S</div>
+        <button class="btn" id="closePfpTab" type="button">./ Close</button>
+      </div>
+
+      <div class="hint">
+      </div>
+
+      <div class="pfp-grid" id="pfpGrid"></div>
+    </div>
+  </section>
+
+  <section class="viewer" id="viewer" aria-hidden="true">
+    <div class="viewer-box" id="viewerBox" role="dialog" aria-modal="true" aria-label="PFP viewer">
+      <div class="viewer-top">
+        <div class="viewer-title" id="viewerTitle">PFP</div>
+        <div class="viewer-actions">
+          <a class="btn" id="downloadBtn" href="#" target="_blank" rel="noopener noreferrer">./ DOWNLOAD</a>
+          <button class="btn" id="closeViewer" type="button">./ Close</button>
+        </div>
+      </div>
+      <img class="viewer-img" id="viewerImg" src="" alt="Selected PFP">
+    </div>
+  </section>
+
+  <div class="dev-wrapper">
+    <a href="https://x.com/realsirandrew" target="_blank" rel="noopener noreferrer">
+      <div class="dev-square">
+        <img src="1.png" alt="dev icon">
+      </div>
+      <span class="icon-label">dev</span>
+    </a>
+  </div>
+
+  <script>
+    const cursor = document.querySelector('.custom-cursor');
+    window.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    const openPfpTab = document.getElementById('openPfpTab');
+    const pfpOverlay = document.getElementById('pfpOverlay');
+    const closePfpTab = document.getElementById('closePfpTab');
+
+    function setOverlay(open) {
+      pfpOverlay.classList.toggle('open', open);
+      pfpOverlay.setAttribute('aria-hidden', open ? 'false' : 'true');
+      document.body.classList.toggle('pfp-open', open);
+    }
+
+    openPfpTab.addEventListener('click', (e) => { e.preventDefault(); setOverlay(true); });
+    closePfpTab.addEventListener('click', () => setOverlay(false));
+    pfpOverlay.addEventListener('click', (e) => { if (e.target === pfpOverlay) setOverlay(false); });
+
+    const viewer = document.getElementById('viewer');
+    const viewerBox = document.getElementById('viewerBox');
+    const viewerImg = document.getElementById('viewerImg');
+    const viewerTitle = document.getElementById('viewerTitle');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const closeViewer = document.getElementById('closeViewer');
+
+    function setViewer(open) {
+      viewer.classList.toggle('open', open);
+      viewer.setAttribute('aria-hidden', open ? 'false' : 'true');
+    }
+
+    function fitViewerToImage() {
+      const padding = 44;   
+      const chrome = 58;         
+      const maxW = Math.floor(window.innerWidth - padding);
+      const maxH = Math.floor(window.innerHeight - 32 - padding); 
+
+      const iw = viewerImg.naturalWidth || 800;
+      const ih = viewerImg.naturalHeight || 600;
+
+      const maxImgW = Math.max(240, maxW);
+      const maxImgH = Math.max(180, maxH - chrome);
+
+      const scale = Math.min(1, maxImgW / iw, maxImgH / ih);
+
+      const dispW = Math.round(iw * scale);
+      const dispH = Math.round(ih * scale);
+
+      viewerBox.style.width = dispW + "px";
+      viewerImg.style.width = dispW + "px";
+      viewerImg.style.height = dispH + "px";
+    }
+
+    function openViewer({ src, name }) {
+      viewerTitle.textContent = name || 'PFP';
+      downloadBtn.href = src;
+
+      viewerBox.style.width = '';
+      viewerImg.style.width = '';
+      viewerImg.style.height = '';
+
+      viewerImg.onload = () => {
+        fitViewerToImage();
+      };
+
+      viewerImg.src = src;
+      viewerImg.alt = name || 'Selected PFP';
+
+      setViewer(true);
+    }
+
+    function closeViewerNow() {
+      setViewer(false);
+      viewerImg.onload = null;
+    }
+
+    closeViewer.addEventListener('click', closeViewerNow);
+    viewer.addEventListener('click', (e) => { if (e.target === viewer) closeViewerNow(); });
+
+    window.addEventListener('resize', () => {
+      if (viewer.classList.contains('open') && viewerImg.complete) fitViewerToImage();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (viewer.classList.contains('open')) closeViewerNow();
+        else if (pfpOverlay.classList.contains('open')) setOverlay(false);
+      }
+    });
+
+    const pfpGrid = document.getElementById('pfpGrid');
+    const total = 18;
+
+    const items = Array.from({ length: total }, (_, i) => {
+      const n = i + 1;
+      return { src: `grad-${n}.png`, name: `GRAD PFP #${String(n).padStart(2, '0')}` };
+    });
+
+    pfpGrid.innerHTML = items.map(item => `
+      <button class="pfp-card" type="button" data-full="${item.src}" data-name="${item.name}" aria-label="Open ${item.name}">
+        <img src="${item.src}" alt="${item.name}">
+      </button>
+    `).join('');
+
+    pfpGrid.addEventListener('click', (e) => {
+      const card = e.target.closest('.pfp-card');
+      if (!card) return;
+      openViewer({ src: card.getAttribute('data-full'), name: card.getAttribute('data-name') });
+    });
+  </script>
+</body>
+</html>
+<script>window.scrollTo(0, 0); setTimeout(function() { window.scrollTo(0, 0); },200)</script>
