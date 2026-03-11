@@ -75,7 +75,12 @@
       gap: 24px;
     }
 
-    .row { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+    .row {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
 
     .dock-icon {
       width: 90px;
@@ -139,6 +144,7 @@
       overflow: auto;
       cursor: none;
     }
+
     .overlay.open { display: block; }
 
     .panel {
@@ -232,7 +238,7 @@
     .pfp-card img {
       width: 100%;
       height: auto;
-      display: block; 
+      display: block;
     }
 
     .viewer {
@@ -247,6 +253,7 @@
       backdrop-filter: blur(4px);
       cursor: none;
     }
+
     .viewer.open { display: flex; }
 
     .viewer-box {
@@ -283,9 +290,10 @@
       display: block;
       width: 100%;
       height: auto;
-      background: radial-gradient(circle at 20% 10%, rgba(157,0,255,0.12), transparent 45%),
-                  radial-gradient(circle at 80% 20%, rgba(246,212,74,0.10), transparent 55%),
-                  rgba(0,0,0,0.35);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(157,0,255,0.12), transparent 45%),
+        radial-gradient(circle at 80% 20%, rgba(246,212,74,0.10), transparent 55%),
+        rgba(0,0,0,0.35);
     }
 
     .dev-wrapper {
@@ -320,7 +328,12 @@
       transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
     }
 
-    .dev-square img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .dev-square img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     .dev-wrapper a:hover .dev-square {
       transform: translateY(-4px) scale(1.03);
@@ -329,9 +342,17 @@
         0 0 0 1px rgba(255, 255, 255, 0.1);
     }
 
-    @media (max-width: 900px) { body { overflow: auto; } }
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
-      .dock-icon:hover .icon-square, .dev-wrapper a:hover .dev-square, .btn:hover, .pfp-card:hover { transform: none; }
+      .dock-icon:hover .icon-square,
+      .dev-wrapper a:hover .dev-square,
+      .btn:hover,
+      .pfp-card:hover {
+        transform: none;
+      }
     }
   </style>
 </head>
@@ -348,32 +369,38 @@
       </div>
       <span>GRADIENT COMMUNITY HUB</span>
     </div>
-    <div class="top-right"><span>EN</span></div>
+    <div class="top-right">
+      <span>EN</span>
+    </div>
   </div>
 
   <div class="desktop" id="desktop">
     <div class="row row-1">
-
       <a class="dock-icon" href="https://be-with-parallax.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">Be w/ Parallax</span>
       </a>
+
       <a class="dock-icon" href="https://build-open-with-parallax.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">Build Open</span>
       </a>
+
       <a class="dock-icon" href="https://build-with-parallax.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">Build with Parallax</span>
       </a>
+
       <a class="dock-icon" href="https://download-parallax.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">Download Parallax</span>
       </a>
+
       <a class="dock-icon" href="https://echo-gradient.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">ECHO</span>
       </a>
+
       <a class="dock-icon" href="https://golden-grad.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">GOLDEN GRAD</span>
@@ -385,26 +412,32 @@
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">GG</span>
       </a>
+
       <a class="dock-icon" href="https://grad-click-hunt.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">Click Hunt</span>
       </a>
+
       <a class="dock-icon" href="https://grad-dodge.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">Grad Dodge</span>
       </a>
+
       <a class="dock-icon" href="https://grad-hackers.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">Hackers</span>
       </a>
+
       <a class="dock-icon" href="https://grad-catch-game.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">Grad Catch</span>
       </a>
+
       <a class="dock-icon" href="https://grad-jump.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">GRAD JUMP</span>
       </a>
+
       <a class="dock-icon" href="https://ice-cream-for-david.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">ICE CREAM</span>
@@ -416,31 +449,45 @@
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">ICE CREAM CAMPAIGN</span>
       </a>
+
       <a class="dock-icon" href="https://gradsaur-game.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">GRADsaur</span>
       </a>
+
       <a class="dock-icon" href="https://grad-minesweeper.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">MINESWEEPER</span>
       </a>
+
       <a class="dock-icon" href="https://chupa-grad-game.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">CHUPA GAME</span>
       </a>
+
       <a class="dock-icon" href="https://rich-hexx.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">RICH HEXX</span>
       </a>
+
       <a class="dock-icon" href="https://secret-grad-game.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">SECRET GAME</span>
       </a>
 
-      <!-- NEW: FIND PAIR -->
       <a class="dock-icon" href="https://grad-find-pair.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">FIND PAIR</span>
+      </a>
+
+      <a class="dock-icon" href="https://grad-2048.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">2048</span>
+      </a>
+
+      <a class="dock-icon" href="https://grad-tulip-leila.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">LEILA TULIP</span>
       </a>
     </div>
 
@@ -454,7 +501,6 @@
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">j.mike pfp's</span>
       </a>
-
     </div>
 
     <div class="row row-5">
@@ -462,10 +508,12 @@
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">Gradvember</span>
       </a>
+
       <a class="dock-icon" href="https://grad-xmas-contest.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">GRAD XMAS</span>
       </a>
+
       <a class="dock-icon" href="https://merry-grad-christmas.vercel.app/" target="_blank" rel="noopener noreferrer">
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">MERRY CHRISTMAS</span>
@@ -485,6 +533,11 @@
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">GRAD WEB</span>
       </a>
+
+      <a class="dock-icon" href="https://grad-womens-day.vercel.app/" target="_blank" rel="noopener noreferrer">
+        <div class="icon-square"><span class="icon-text">./</span></div>
+        <span class="icon-label">WOMEN'S DAY</span>
+      </a>
     </div>
   </div>
 
@@ -495,8 +548,7 @@
         <button class="btn" id="closePfpTab" type="button">./ Close</button>
       </div>
 
-      <div class="hint">
-      </div>
+      <div class="hint"></div>
 
       <div class="pfp-grid" id="pfpGrid"></div>
     </div>
@@ -526,6 +578,7 @@
 
   <script>
     const cursor = document.querySelector('.custom-cursor');
+
     window.addEventListener('mousemove', (e) => {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
@@ -541,9 +594,16 @@
       document.body.classList.toggle('pfp-open', open);
     }
 
-    openPfpTab.addEventListener('click', (e) => { e.preventDefault(); setOverlay(true); });
+    openPfpTab.addEventListener('click', (e) => {
+      e.preventDefault();
+      setOverlay(true);
+    });
+
     closePfpTab.addEventListener('click', () => setOverlay(false));
-    pfpOverlay.addEventListener('click', (e) => { if (e.target === pfpOverlay) setOverlay(false); });
+
+    pfpOverlay.addEventListener('click', (e) => {
+      if (e.target === pfpOverlay) setOverlay(false);
+    });
 
     const viewer = document.getElementById('viewer');
     const viewerBox = document.getElementById('viewerBox');
@@ -558,10 +618,10 @@
     }
 
     function fitViewerToImage() {
-      const padding = 44;   
-      const chrome = 58;         
+      const padding = 44;
+      const chrome = 58;
       const maxW = Math.floor(window.innerWidth - padding);
-      const maxH = Math.floor(window.innerHeight - 32 - padding); 
+      const maxH = Math.floor(window.innerHeight - 32 - padding);
 
       const iw = viewerImg.naturalWidth || 800;
       const ih = viewerImg.naturalHeight || 600;
@@ -574,9 +634,9 @@
       const dispW = Math.round(iw * scale);
       const dispH = Math.round(ih * scale);
 
-      viewerBox.style.width = dispW + "px";
-      viewerImg.style.width = dispW + "px";
-      viewerImg.style.height = dispH + "px";
+      viewerBox.style.width = dispW + 'px';
+      viewerImg.style.width = dispW + 'px';
+      viewerImg.style.height = dispH + 'px';
     }
 
     function openViewer({ src, name }) {
@@ -603,10 +663,15 @@
     }
 
     closeViewer.addEventListener('click', closeViewerNow);
-    viewer.addEventListener('click', (e) => { if (e.target === viewer) closeViewerNow(); });
+
+    viewer.addEventListener('click', (e) => {
+      if (e.target === viewer) closeViewerNow();
+    });
 
     window.addEventListener('resize', () => {
-      if (viewer.classList.contains('open') && viewerImg.complete) fitViewerToImage();
+      if (viewer.classList.contains('open') && viewerImg.complete) {
+        fitViewerToImage();
+      }
     });
 
     window.addEventListener('keydown', (e) => {
@@ -617,11 +682,14 @@
     });
 
     const pfpGrid = document.getElementById('pfpGrid');
-    const total = 28;
+    const total = 30;
 
     const items = Array.from({ length: total }, (_, i) => {
       const n = i + 1;
-      return { src: `grad-${n}.png`, name: `GRAD PFP #${String(n).padStart(2, '0')}` };
+      return {
+        src: `grad-${n}.png`,
+        name: `GRAD PFP #${String(n).padStart(2, '0')}`
+      };
     });
 
     pfpGrid.innerHTML = items.map(item => `
@@ -633,8 +701,13 @@
     pfpGrid.addEventListener('click', (e) => {
       const card = e.target.closest('.pfp-card');
       if (!card) return;
-      openViewer({ src: card.getAttribute('data-full'), name: card.getAttribute('data-name') });
+
+      openViewer({
+        src: card.getAttribute('data-full'),
+        name: card.getAttribute('data-name')
+      });
     });
   </script>
 </body>
 </html>
+
