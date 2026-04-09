@@ -147,6 +147,11 @@
 
     .overlay.open { display: block; }
 
+#articlesOverlay {
+  background:
+    radial-gradient(circle at 25% 15%, rgba(246,212,74,0.14), transparent 50%),
+    linear-gradient(180deg, rgba(10,12,20,0.92), rgba(5,6,10,0.92));
+}
     .panel {
       max-width: 1100px;
       margin: 0 auto;
@@ -489,6 +494,15 @@
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">LEILA TULIP</span>
       </a>
+  <a class="dock-icon" href="https://gradbara-clicker.vercel.app/" target="_blank" rel="noopener noreferrer">
+    <div class="icon-square"><span class="icon-text">./</span></div>
+    <span class="icon-label">CLICKER</span>
+  </a>
+
+  <a class="dock-icon" href="https://grad-frens-in-snake.vercel.app/" target="_blank" rel="noopener noreferrer">
+    <div class="icon-square"><span class="icon-text">./</span></div>
+    <span class="icon-label">GRAD SNAKE</span>
+  </a>
     </div>
 
     <div class="row row-4">
@@ -538,6 +552,10 @@
         <div class="icon-square"><span class="icon-text">./</span></div>
         <span class="icon-label">WOMEN'S DAY</span>
       </a>
+  <a class="dock-icon" href="#" id="openArticles" aria-label="Open Intern Articles">
+    <div class="icon-square"><span class="icon-text">./</span></div>
+    <span class="icon-label">INTERN ARTICLES</span>
+  </a>
     </div>
   </div>
 
@@ -553,7 +571,22 @@
       <div class="pfp-grid" id="pfpGrid"></div>
     </div>
   </section>
+  <section class="overlay" id="articlesOverlay" aria-hidden="true">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">INTERN ARTICLES</div>
+        <button class="btn" id="closeArticles" type="button">./ Close</button>
+      </div>
 
+      <div class="hint">Click on article title to open source post.</div>
+
+      <ul style="list-style:none; padding-left:0; display:flex; flex-direction:column; gap:10px;">
+        <li><a href="https://x.com/gradientintern/status/2032358310209278361" target="_blank" rel="noopener noreferrer" style="color:#c5c6c7; text-decoration:none;">1. Start your Agentic journey without coding via ClawBox by Commonstack</a></li>
+        <li><a href="https://x.com/gradientintern/status/2036349161382023238" target="_blank" rel="noopener noreferrer" style="color:#c5c6c7; text-decoration:none;">2. ClawBox by Commonstack is now open source, a unified dashboard for Agents</a></li>
+        <li><a href="https://x.com/gradientintern/status/2041103817773576305" target="_blank" rel="noopener noreferrer" style="color:#c5c6c7; text-decoration:none;">3. How I saved over 90% per query on my LLM API billing using Uncommonroute</a></li>
+      </ul>
+    </div>
+  </section>
   <section class="viewer" id="viewer" aria-hidden="true">
     <div class="viewer-box" id="viewerBox" role="dialog" aria-modal="true" aria-label="PFP viewer">
       <div class="viewer-top">
@@ -604,6 +637,26 @@
     pfpOverlay.addEventListener('click', (e) => {
       if (e.target === pfpOverlay) setOverlay(false);
     });
+
+const openArticles = document.getElementById('openArticles');
+const articlesOverlay = document.getElementById('articlesOverlay');
+const closeArticles = document.getElementById('closeArticles');
+
+function setArticlesOverlay(open) {
+  articlesOverlay.classList.toggle('open', open);
+  articlesOverlay.setAttribute('aria-hidden', open ? 'false' : 'true');
+}
+
+openArticles.addEventListener('click', (e) => {
+  e.preventDefault();
+  setArticlesOverlay(true);
+});
+
+closeArticles.addEventListener('click', () => setArticlesOverlay(false));
+
+articlesOverlay.addEventListener('click', (e) => {
+  if (e.target === articlesOverlay) setArticlesOverlay(false);
+});
 
     const viewer = document.getElementById('viewer');
     const viewerBox = document.getElementById('viewerBox');
@@ -710,4 +763,3 @@
   </script>
 </body>
 </html>
-
